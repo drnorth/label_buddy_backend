@@ -4,9 +4,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { dbConfig } from './config/database.config';
 import { LanguagesModule } from './languages/languages.module';
+import { CropsModule } from './crops/crops.module';
 
 @Module({
-  imports: [SequelizeModule.forRoot(dbConfig), LanguagesModule],
+  imports: [SequelizeModule.forRoot(dbConfig), LanguagesModule, CropsModule],
   controllers: [AppController],
   providers: [AppService],
 })

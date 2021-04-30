@@ -1,26 +1,41 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
 import { CreateLanguageDto } from './dto/create-language.dto';
 import { UpdateLanguageDto } from './dto/update-language.dto';
+import { Language } from './entities/language.entity';
 
 @Injectable()
 export class LanguagesService {
-  create(createLanguageDto: CreateLanguageDto) {
-    return 'This action adds a new language';
+  constructor(@InjectModel(Language) private languageModel: typeof Language) {}
+  async create(createLanguageDto: CreateLanguageDto) {
+    const language = new this.languageModel(createLanguageDto);
+    await language.save();
+    return language;
   }
 
-  findAll() {
-    return `This action returns all languages`;
+  async findAll() {
+    return await this.languageModel.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} language`;
+  async findOne(id: number) {
+    const language = await this.languageModel.findOne({ where: { id } });
+    if (language) {
+      return language;
+    }
+    throw new HttpException(
+      `Language with id '${id}' not found`,
+      HttpStatus.NOT_FOUND,
+    );
   }
 
-  update(id: number, updateLanguageDto: UpdateLanguageDto) {
-    return `This action updates a #${id} language`;
+  async update(id: number, updateLanguageDto: UpdateLanguageDto) {
+    const language = await this.findOne(id);
+    return await language.update(updateLanguageDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} language`;
+  async remove(id: number) {
+    const language = await this.findOne(id);
+    await language.destroy();
+    return;
   }
 }
