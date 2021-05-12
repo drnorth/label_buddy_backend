@@ -5,6 +5,9 @@ import { Column, Model, Table } from 'sequelize-typescript';
   tableName: 'language',
 })
 export class Language extends Model {
+  @Column({ primaryKey: true })
+  code: string;
+
   @Column
-  name: string;
+  title: string;
 }

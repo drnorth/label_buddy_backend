@@ -10,7 +10,7 @@ export class CropTranslation extends Model {
 
   @ForeignKey(() => Language)
   @Column({ primaryKey: true, unique: 'index', field: 'language_code' })
-  languageCode: number;
+  languageCode: string;
 
   @Column
   name: string;

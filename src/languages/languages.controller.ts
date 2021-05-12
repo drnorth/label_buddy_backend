@@ -27,21 +27,21 @@ export class LanguagesController {
     return await this.languagesService.create(createLanguageDto);
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.languagesService.findOne(+id);
+  @Get(':code')
+  async findOne(@Param('code') code: string) {
+    return await this.languagesService.findOne(code);
   }
 
-  @Patch(':id')
+  @Patch(':code')
   async update(
-    @Param('id') id: string,
+    @Param('code') code: string,
     @Body() updateLanguageDto: UpdateLanguageDto,
   ) {
-    return await this.languagesService.update(+id, updateLanguageDto);
+    return await this.languagesService.update(code, updateLanguageDto);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return await this.languagesService.remove(+id);
+  @Delete(':code')
+  async remove(@Param('code') code: string) {
+    return await this.languagesService.remove(code);
   }
 }

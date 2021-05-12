@@ -30,12 +30,12 @@ module.exports = {
               onDelete: 'cascade',
             },
             language_code: {
-              type: Sequelize.INTEGER,
+              type: Sequelize.STRING,
               primaryKey: true,
               unique: 'index',
               references: {
                 model: 'language',
-                key: 'id',
+                key: 'code',
               },
               onDelete: 'cascade',
             },

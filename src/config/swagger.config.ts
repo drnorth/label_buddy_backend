@@ -5,5 +5,6 @@ export const swaggerConfig = new DocumentBuilder()
   .setDescription('Label buddy API responses')
   .setVersion('1.0')
   .addTag('Languages')
+  .addTag('Products')
   .addTag('Crops')
   .build();

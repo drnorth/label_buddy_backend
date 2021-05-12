@@ -4,12 +4,21 @@ module.exports = {
   up: async (queryInterface) => {
     return queryInterface.bulkInsert('language', [
       {
-        name: 'en_EU_seed',
+        code: 'en',
+        title: 'english',
+      },
+      {
+        code: 'te',
+        title: 'telugu',
       },
     ]);
   },
 
-  down: async (queryInterface) => {
-    return queryInterface.bulkDelete('language', { name: 'en_EU_seed' }, {});
+  down: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete(
+      'language',
+      { code: { [Sequelize.Op.or]: ['en', 'te'] } },
+      {},
+    );
   },
 };

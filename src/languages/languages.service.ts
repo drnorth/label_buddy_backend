@@ -17,24 +17,24 @@ export class LanguagesService {
     return await this.languageModel.findAll();
   }
 
-  async findOne(id: number) {
-    const language = await this.languageModel.findOne({ where: { id } });
+  async findOne(code: string) {
+    const language = await this.languageModel.findOne({ where: { code } });
     if (language) {
       return language;
     }
     throw new HttpException(
-      `Language with id '${id}' not found`,
+      `Language with code '${code}' not found`,
       HttpStatus.NOT_FOUND,
     );
   }
 
-  async update(id: number, updateLanguageDto: UpdateLanguageDto) {
-    const language = await this.findOne(id);
+  async update(code: string, updateLanguageDto: UpdateLanguageDto) {
+    const language = await this.findOne(code);
     return await language.update(updateLanguageDto);
   }
 
-  async remove(id: number) {
-    const language = await this.findOne(id);
+  async remove(code: string) {
+    const language = await this.findOne(code);
     await language.destroy();
     return;
   }

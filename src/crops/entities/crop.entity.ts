@@ -1,5 +1,6 @@
 import { Table, Model, Column, HasMany } from 'sequelize-typescript';
-import { CropTranslation } from './cropTranslation.entity';
+import { ProductCrop } from 'src/product-crops/entities/product-crop.entity';
+import { CropTranslation } from './crop-translation.entity';
 
 @Table({ timestamps: false, tableName: 'crop' })
 export class Crop extends Model {
@@ -8,4 +9,7 @@ export class Crop extends Model {
 
   @HasMany(() => CropTranslation)
   translations: CropTranslation[];
+
+  @HasMany(() => ProductCrop)
+  productCrop: ProductCrop[];
 }

@@ -6,7 +6,7 @@ import {
   IsOptional,
   ValidateNested,
 } from 'class-validator';
-import { LanguageCodeCreateDto } from 'src/languages/dto/language-code.dto';
+import { TranslationCreateDto } from 'src/languages/dto/translations.dto';
 
 export class CreateCropDto {
   @ApiProperty()
@@ -14,10 +14,10 @@ export class CreateCropDto {
   @IsOptional()
   imgUrl?: string;
 
-  @ApiProperty({ type: () => [LanguageCodeCreateDto] })
+  @ApiProperty({ type: () => [TranslationCreateDto] })
   @IsArray()
   @IsOptional()
   @ValidateNested({ each: true })
-  @Type(() => LanguageCodeCreateDto)
-  translations?: LanguageCodeCreateDto[];
+  @Type(() => TranslationCreateDto)
+  translations?: TranslationCreateDto[];
 }
