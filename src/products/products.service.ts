@@ -51,7 +51,7 @@ export class ProductsService {
     const products = await this.productModel.findAll({
       attributes: [
         'id',
-        'img_url',
+        ['img_url', 'url'],
         [sequelize.fn('max', sequelize.col('translations.name')), 'title'],
         [sequelize.fn('max', sequelize.col('translations.desc')), 'desc'],
       ],

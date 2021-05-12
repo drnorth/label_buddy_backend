@@ -56,7 +56,7 @@ export class CropsService {
     const crops = await this.cropModel.findAll({
       attributes: [
         'id',
-        'img_url',
+        ['img_url', 'url'],
         [
           sequelize.fn(
             'max',
@@ -90,7 +90,7 @@ export class CropsService {
       where: { id },
       attributes: [
         'id',
-        'img_url',
+        ['img_url', 'url'],
         [
           sequelize.fn(
             'max',
